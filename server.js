@@ -12,8 +12,8 @@ var PORT = process.env.PORT || 8080;
 var db = require("./models");
 
 //for github passport
-var GITHUB_CLIENT_ID = "c0bd269a1176ef95c5b4";
-var GITHUB_CLIENT_SECRET = "5fbb09797aa6cb40d91716010281133fc7e2b38c";
+var GITHUB_CLIENT_ID = "caff6bf6f0c8379836f4";
+var GITHUB_CLIENT_SECRET = "34e26a2b6b29e0e58ccc1ea8e60ad3f119baa5c0";
 
 // Passport session setup.
 //   To support persistent login sessions, Passport needs to be able to
@@ -37,7 +37,7 @@ passport.deserializeUser(function(obj, done) {
 passport.use(new GitHubStrategy({
     clientID: GITHUB_CLIENT_ID,
     clientSecret: GITHUB_CLIENT_SECRET,
-    callbackURL: "https://sandbox-for-devs.herokuapp.com/auth/github/callback"
+    callbackURL: "https://projectdepottest.herokuapp.com/auth/github/callback"
   },
   function(accessToken, refreshToken, profile, done) {
 
