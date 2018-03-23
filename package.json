@@ -9,15 +9,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/sonnyhughes/ProjectDepot.git"
+    "url": "git+https://github.com/sonnyhughes/projectdepottest.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/sonnyhughes/ProjectDepot/issues"
+    "url": "https://github.com/sonnyhughes/projectdepottest/issues"
   },
-  "homepage": "https://github.com/sonnyhughes/ProjectDepot#readme",
+  "homepage": "https://github.com/sonnyhughes/projectdepottest#readme",
   "dependencies": {
     "body-parser": "^1.18.2",
     "express": "^4.16.3",
