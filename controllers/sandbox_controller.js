@@ -12,8 +12,8 @@ const nodemailer = require('nodemailer');
 let transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-        user: 'sandboxteam321@gmail.com',
-        pass: 'sandboxfordevs'
+        user: 'pronghorns2017@gmail.com',
+        pass: 'NWBootcamp'
     }
 });
 
@@ -205,11 +205,11 @@ module.exports = function (app) {
 
                                         // setup email data with unicode symbols
                                         var mailOptions = {
-                                            from: '"SandBox Team 👻" <sandboxteam321@gmail.com>', // sender address
+                                            from: '"Project Depot Team 👻" <projectdepotteam@gmail.com>', // sender address
                                             to: listOfEmails, // list of receivers
-                                            subject: 'SANDBOX COLLABORATION!', // Subject line
+                                            subject: 'Project COLLABORATION!', // Subject line
                                             text: 'Hi! Let\'s work together!', // plain text body
-                                            html: '<b>Hi! Let\'s work together!</b><p>This is an official email from Sandbox Dev!</p><p>Your group\'s project description is written below: </p>' + '"'+emailBody+'"'
+                                            html: '<b>Hi! Let\'s work together!</b><p>This is an official email from Project Depot!</p><p>Your group\'s project description is written below: </p>' + '"'+emailBody+'"'
                                         };
 
                                         transporter.sendMail(mailOptions, (error, info) => {
