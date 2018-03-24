@@ -123,6 +123,40 @@
                      </form>
                   </div>
                </div>
+                <div class="col-lg-6">
+                  <div class="row">
+                    {{#each posts}} {{#unless capacity}}
+                    <div class="col-lg-3" id="postBox">
+                      <center>
+                        <img src="{{pictureUrl}}" height="100" width="100" border-radius="100%">
+                      </center>
+                      <center>
+                        <h6>Study Group Organizer: {{user}}</h6>
+                      </center>
+                      <center>
+                        <h6>Max Users: {{groupLimit}}</h6>
+                      </center>
+                      <p>
+                        <form action="/post/join" method="POST" class="join">
+                          <input type="hidden" name="postId" value="{{this.id}}">
+                          <input type="hidden" name="groupLimit" value="{{this.groupLimit}}">
+                          <input type="hidden" name="capacity" value="false">
+                          <div class="box-bottom">
+                            <button type="submit" id="build" margin="20px" class="btn btn-success">&#x2B06 Upvote</button>
+                          </div>
+                        </form>
+                      </p>
+                      <div class="box">
+                        <div class="box-gray aligncenter">
+                          <div class="icon">
+                            {{body}} {{number}}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    {{/unless}} {{/each}}
+                  </div>
+                </div>
             </div>
       </section>
 
@@ -130,7 +164,7 @@
 <!-- All Ideas Section -->
 <section id="content">
    <!-- For each post, create a div col-lg-3 -->
-   <div class="container">
+   {{!-- <div class="container">
       <div class="row">
          <div class="col-lg-6">
             <div class="row">
@@ -164,7 +198,7 @@
             </div>
          </div>
       </div>
-   </div>
+   </div> --}}
 </section>
 
 <!-- footer -->
