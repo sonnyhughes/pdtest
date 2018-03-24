@@ -628,12 +628,14 @@ font-size: 10px;
 }
 
 .btn-success {
-  background: #E792B5;
+  background: #6cc644;
   border-color: white;
+  border-radius: 5px;
 }
 .btn-success:hover {
-  background: #E792B5;
+  background: #6cc644;
   border-color: #656565;
+  border-radius: 5px;
 }
 .btn-warning {
   background: #F0B300;

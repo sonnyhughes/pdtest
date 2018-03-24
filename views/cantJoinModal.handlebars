@@ -2,7 +2,7 @@
 <html lang="en">
    <head>
       <meta charset="utf-8">
-      <title>Sandbox</title>
+      <title>Study Hall</title>
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <meta name="description" content="" />
       <meta name="author" content="http://bootstraptaste.com" />
@@ -32,7 +32,7 @@
                   <span class="icon-bar"></span>
                   <span class="icon-bar"></span>
                   </button>
-                  <a class="navbar-brand"><span>S</span>andbox</a>
+                  <a class="navbar-brand">Study Hall</a>
                </div>
                <div class="navbar-collapse collapse ">
                   <ul class="nav navbar-nav">
@@ -44,7 +44,7 @@
                      {{else}}
                      <li class="active"><a href="/">Home</a></li>
                      <li><a href="/login">Login</a></li>
-                     <h4 class="welcome">Welcome! Please log in.</h4>
+                     <h4 class="welcome"></h4>
                      {{/if}}
                      {{msg}}
                   </ul>
@@ -54,7 +54,7 @@
       </header>
       <!-- End Header -->
       <!-- Start of carousel -->
-      <div class="container">
+      {{!-- <div class="container">
          <div id="myCarousel" class="carousel slide" data-ride="carousel">
             <!-- Indicators -->
             <ol class="carousel-indicators">
@@ -86,7 +86,7 @@
                   </div>
                </div>
             </div>
-         </div>
+         </div> --}}
       </div>
       <!-- End of carousel -->
       <!-- Second Header Section -->
@@ -94,14 +94,14 @@
          <div class="container">
             <div class="row">
                <!-- Inputting Idea -->
-               <div class="col-lg-6 col-lg-offset-3">
+               <div class="col-lg-6">
                   <div class="big-cta">
                      <div class="cta-text">
-                        <h2><span>Sandbox</span> </h2>
+                        <h2><span>Study Hall</span> </h2>
                      </div>
                      <form class="form-horizontal" method="POST" action="/add/" class="button-size">
                         <fieldset>
-                           <legend class="text-center col-lg-12">Write Your Idea</legend>
+                           <legend class="text-center col-lg-12">What Do Need To Understand Better?</legend>
                            <br>
                            <div class="form-group">
                               <div class="col-lg-8 col-lg-offset-2">
@@ -113,8 +113,8 @@
                               </div>
                            </div>
                            <div class="form-group">
-                              <center><div class="col-lg-6 col-lg-offset-3">
-                                 <button type="submit" class="btn btn-success">Idea!</button>
+                              <center><div class="col-lg-12">
+                                 <button type="submit" class="btn btn-success">Submit!</button>
                               </div></center>
                            </div>
                         </fieldset>
@@ -130,7 +130,7 @@
    <!-- For each post, create a div col-lg-3 -->
    <div class="container">
       <div class="row">
-         <div class="col-lg-12">
+         <div class="col-lg-6">
             <div class="row">
             {{#each posts}}
                <div class="col-lg-3">
@@ -170,15 +170,15 @@
       <div class="row">
          <div class="col-lg-3">
             <div class="widget">
-               <h5 class="widgetheading">Get in touch with us</h5>
+               <h5 class="widgetheading">Contact Us</h5>
                <address>
-                  <strong>Sandbox Inc.</strong><br>
+                  <strong>Study Hall Inc.</strong><br>
                   9006 West Corner Avenue, Suite 501<br>
                   Someplace 16425 Earth
                </address>
                <p>
-                  <i class="icon-phone"></i> (605) 871-2222 <br>
-                  <i class="icon-envelope-alt"></i> sandboxteam321@gmail.com
+                  <i class="icon-phone"></i> 312.456.7890 <br>
+                  <i class="icon-envelope-alt"></i> ProjectDepotTeamUS@gmail.com
                </p>
             </div>
          </div>
@@ -198,7 +198,7 @@
                <h5 class="widgetheading">Popular Projects</h5>
                <ul class="link-list">
                   <li>Virtual Whiteboard</li>
-                  <li>Find My Father - An easy-to-use app for lost children</li>
+                  <li>Project Manager</li>
                   <li>Badger Facial Recognition</li>
                </ul>
             </div>
@@ -210,7 +210,7 @@
          <div class="row">
             <div class="col-lg-6">
                <div class="copyright">
-                  <p>&copy; Sandbox. All right reserved.</p>
+                  <p>&copy; Study Hall. All right reserved.</p>
                   <div class="credits">
                      <!--
                         All the links in the footer should remain intact.

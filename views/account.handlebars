@@ -8,19 +8,19 @@
                   <span class="icon-bar"></span>
                   <span class="icon-bar"></span>
                   </button>
-                  <a class="navbar-brand"><span>S</span>andbox</a>
+                  <a class="navbar-brand">Study Hall</a>
                </div>
                <div class="navbar-collapse collapse ">
                   <ul class="nav navbar-nav">
                      {{#if user}}
                      <li><a href="/">Home</a></li>
                      <li class="active"><a href="/account">Account</a></li>
-                     <li><a href="/past">Past Projects</a></li>
+                     <li><a href="/past">Past Topics</a></li>
                      <li><a href="/logout">Log Out</a></li>
                      <h4 class="hello">Hello, {{user.displayName}}</h4>
                      {{else}}
                      <li><a href="/">Home</a></li>
-                     <li><a href="/past">Past Projects</a></li>
+                     <li><a href="/past">Past Topics</a></li>
                      <li><a href="/auth/github">Login with Github</a></li>
                      {{/if}}
                      {{msg}}
