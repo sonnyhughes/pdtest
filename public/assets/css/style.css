@@ -426,7 +426,7 @@ section.callaction {
 	width: 100%;
 }
 .box-gray  {
-	background: #999;
+	background: #fff;
 	padding: 20px 20px 30px;
 }
 .box-gray  h4,.box-gray  i {
@@ -1176,7 +1176,7 @@ article .post-heading h3 a:hover {
 }
 
 .post-meta .comments a {
-	color:#fff;
+	color:rgb(255, 255, 255);
 	font-size:12px;
 	font-weight:700;
 }
