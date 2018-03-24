@@ -126,9 +126,9 @@
                 <div class="col-lg-6">
                   <div class="row">
                     {{#each posts}} {{#unless capacity}}
-                    <div class="col-lg-3" id="postBox" border-radius="500px">
+                    <div class="col-lg-3" id="postBox">
                       <center>
-                        <img src="{{pictureUrl}}" height="100" width="100">
+                        <img src="{{pictureUrl}}" height="100" width="100" border-radius="50%">
                       </center>
                       <center>
                         <h6>Study Group Organizer: {{user}}</h6>
@@ -142,7 +142,7 @@
                           <input type="hidden" name="groupLimit" value="{{this.groupLimit}}">
                           <input type="hidden" name="capacity" value="false">
                           <div class="box-bottom">
-                            <button type="submit" id="build" margin="20px" class="btn btn-success">&#x2B06 Upvote</button>
+                            <button type="submit" id="build" margin="20px" class="btn btn-success">&oplus Join Up!</button>
                           </div>
                         </form>
                       </p>
@@ -180,7 +180,7 @@
                      <input type="hidden" name="groupLimit" value="{{this.groupLimit}}">
                      <input type="hidden" name="capacity" value="false">
                      <div class="box-bottom">
-                        <button type="submit" id="build" margin="20px" class="btn btn-success">&#x2B06 Upvote</button>
+                        <button type="submit" id="build" margin="20px" class="btn btn-success">&oplus Join Up!</button>
                      </div>
                   </form>
                   </p>
