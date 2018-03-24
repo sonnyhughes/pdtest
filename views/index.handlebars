@@ -137,9 +137,9 @@
             {{#each posts}}
             {{#unless capacity}}
                <div class="col-lg-3" id="postBox">
-               <center><img src="{{pictureUrl}}" height="50" width="50"></center>
-               <center><h6>Idea By: {{user}}</h6></center>
-               <center><h6>I need {{groupLimit}} people!</h6></center>
+               <center><img src="{{pictureUrl}}" height="100" width="100" border-radius="50%"></center>
+               <center><h6>Study Group Organizer: {{user}}</h6></center>
+               <center><h6>Max Users: {{groupLimit}}</h6></center>
                   <p>
                   <form action="/post/join" method="POST" class="join">
                      <input type="hidden" name="postId" value="{{this.id}}">
