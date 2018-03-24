@@ -1,6 +1,6 @@
-# Sandbox
+# Study Hall
 
-A playground for app developers. Sign up with Github, explore potential apps you would like to build, join a team, collaborate and begin the process of creation!
+Sign up with Github, submit study group topcs, join a study group, alert your classmates when it's time to meet up!
 
 ## Heroku Link
 
@@ -8,9 +8,19 @@ https://projectdepottest.herokuapp.com/
 
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes:
+Clone the Sandbox repository (https://github.com/sonnyhughes/pdtest.git).
 
-Clone the Sandbox repository (https://github.com/sonnyhughes/pdtest.git) and then create a MySQL database called sandbox_db
+## Built With
+
+* Bootstrap
+* Node.js
+* Passport
+* Node Mailer
+* MySQL
+* Sequelize
+* Express Handlebars
+* Express
+* Heroku
 
 ### NPM Dependencies
 
@@ -34,7 +44,7 @@ Run npm install in the terminal/command line:
     "sequelize-cli": "^4.0.0",
     "util": "^0.10.3"
 
-## Step-by-Step
+## How to Launch Locally
 
 * Run node server.js
 * Visit localhost:8080 
@@ -45,14 +55,3 @@ Sandbox was deployed using Heroku and it's JawsDB add-on:
 
 https://elements.heroku.com/addons/jawsdb
 
-## Built With
-
-* Bootstrap
-* Node.js
-* Passport
-* Node Mailer
-* MySQL
-* Sequelize
-* Express Handlebars
-* Express
-* Heroku
