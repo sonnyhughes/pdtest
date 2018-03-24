@@ -81,9 +81,6 @@ ul {
 }
 .member img {
 	max-height: 30px;
-	border-color: #999;
-	border-width: 2px;
-	border-radius: 50%;
 }
 .members span {
     position: relative;
@@ -429,7 +426,7 @@ section.callaction {
 	width: 100%;
 }
 .box-gray  {
-	background: #999;
+	background: rgb(180, 180, 180);
 	padding: 20px 20px 30px;
 }
 .box-gray  h4,.box-gray  i {
