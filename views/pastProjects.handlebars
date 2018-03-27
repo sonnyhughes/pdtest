@@ -87,7 +87,7 @@
         <div class="col-lg-6">
           <div class="row">
             {{#each posts}} {{#if capacity}}
-            <div class="col-lg-3" id="postBox">
+            <div class="col-lg-6" id="postBox">
               <p>
                 <form action="/{{id}}?_method=PUT" method="POST">
                   <input type="hidden" name="capacity" value="true">
