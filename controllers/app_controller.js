@@ -1,14 +1,10 @@
 // REQUIRE MODELS
 var db = require("../models");
-
-// checks if user is logged in
 var loginBool = require("./login_controller");
-
-//require our modules
 var passport = require('passport');
 const nodemailer = require('nodemailer');
 
-//set up nodemailer
+//GMAIL CONFIGURATION FOR NODEMAILER (DOCUMENTATION SAYS SOMETIMES IT WORKS WITH GMAIL AND SOMETIMES NOT???)
 let transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
@@ -17,13 +13,16 @@ let transporter = nodemailer.createTransport({
     }
 });
 
-// Export these awesome routes
+// EXPORTING ROUTES
 module.exports = function (app) {
-
-    // Get the root route
+    // ROOT ROUTE ROOT ROUTE
     app.get("/", function (req, res, next) {
         Promise.all([
-            db.Post.findAll({order: [['updatedAt', 'DESC']]}),
+            db.Post.findAll({
+                order: [
+                    ['updatedAt', 'DESC']
+                ]
+            }),
             db.User.findAll({}),
             db.UserPost.findAll({})
         ]).then(function (result) {
@@ -40,193 +39,175 @@ module.exports = function (app) {
             console.log(e);
         });
     });
-
-    // Post for creating Ideas
+    // POST FOR ADDING EVENTS
     app.post('/add/', function (req, res) {
-        //if not logged in stop and send modal
-        if(JSON.stringify(req.user) === undefined){
+        // TRIGGER MODAL IF USER IS NOT LOGGED
+        if (JSON.stringify(req.user) === undefined) {
             Promise.all([
+                db.Post.findAll({})
+            ]).then(function (result) {
+                res.render("pleaseLoginModal", {
+                    posts: result[0] || []
+                });
+            });
+            //IF USER IS LOGGED IN
+        } else {
+            var newPost = req.body;
+            //CHECK IF DATA IS PRESENT IN INPUT FIELDS
+            if (req.body['body'] !== "" || req.body['groupLimit'] !== "") {
+                //STORE CURRENT USER EMAIL
+                var currentUser = req.user._json.email;
+                //FETCH USER OBJECT FROM DB
+                Promise.all([
+                    db.User.find({
+                        where: {
+                            email: currentUser
+                        }
+                    })
+                ]).then(function (result) {
+                    //CREATE EVENT OBJECT FOR EACH USER
+                    db.Post.create({
+                        authorEmail: result[0]['email'],
+                        groupLimit: newPost['groupLimit'],
+                        body: newPost['body'],
+                        pictureUrl: result[0]['picture_url'],
+                        user: result[0]['user_name'],
+                        authorId: result[0]['id']
+                    }).then(function (result) {
+                        //LINK EVENT AUTHOR TO GROUP
+                        db.UserPost.create({
+                            userEmail: currentUser,
+                            UserId: result['authorId'],
+                            PostId: result['id']
+                        })
+                        //REFRESH PAGE TO VIEW NEW EVENTS
+                        res.redirect('/');
+                    }).catch(function (err) {
+                        console.log(err);
+                    });
+                });
+                //TRIGGER MODEL IF DATA IS NOT PRESENT IN INPUT FIELDS
+            } else {
+                Promise.all([
                     db.Post.findAll({})
                 ]).then(function (result) {
-                    res.render("pleaseLoginModal", {
+                    res.render("emptyInputModal", {
                         posts: result[0] || []
                     });
                 });
-        //if logged in
-        } else {
+            }
 
-            var newPost = req.body;
-
-            //double check if input fields were filled
-            if(req.body['body'] !== "" || req.body['groupLimit'] !== ""){
-
-                //store the current users email
-                var currentUser = req.user._json.email;
-
-                //get the entire user object from the database
-                Promise.all([
+        }
+    });
+    // POST FOR JOINING EVENTS
+    app.post('/post/join', function (req, res) {
+        // TRIGGER MODAL IF USER IS NOT LOGGED
+        if (JSON.stringify(req.user) === undefined) {
+            Promise.all([
+                db.Post.findAll({}),
+                db.User.findAll({}),
+                db.UserPost.findAll({})
+            ]).then(function (result) {
+                res.render("pleaseLoginModal", {
+                    posts: result[0] || [],
+                    users: result[1] || [],
+                    groups: result[2] || []
+                });
+            });
+        }
+        //IF USER IS LOGGED IN
+        else {
+            //FETCH CURRENT USER INFO AND EVENT SELECTED
+            var currentUser = req.user._json.email;
+            var selectPostId = req.body.postId;
+            var selectGroupLimit = req.body.groupLimit;
+            //FETCH ALL EVENT ENTRIES LINKED TO THAT `postID`
+            db.UserPost.findAll({
+                where: {
+                    postId: selectPostId
+                }
+            }).then(function (result) {
+                //CHECK IF CURRENT USER IS A CURRENT MEMBER OF EVENT
+                var userAlreadyJoinBool = false;
+                //LOOP THROUGH RESULTS
+                for (var i = 0; i < result.length; i++) {
+                    if (result[i]['userEmail'] === currentUser) {
+                        userAlreadyJoinBool = true;
+                    }
+                }
+                //TRIGGER MODAL IF USER IS A CURRENT MEMBER OF AN EVENT
+                if (userAlreadyJoinBool) {
+                    Promise.all([
+                        db.Post.findAll({}),
+                    ]).then(function (result) {
+                        var posts = result[0];
+                        res.render("cantJoinModal", {
+                            posts: posts,
+                            user: req.user
+                        });
+                    }).catch(function (e) {
+                        console.log(e);
+                    });
+                    //IF USER IS NOT A CURRENT MEMBER OF EVENT THEN CREATE EVENT LINKED TO USER
+                } else {
+                    var emailBody;
+                    Promise.all([
                         db.User.find({
                             where: {
                                 email: currentUser
                             }
+                        }),
+                        db.Post.find({
+                            where: {
+                                id: selectPostId
+                            }
                         })
                     ]).then(function (result) {
-                            //and then create the post object per the user and input information
-                            db.Post.create({
-                                authorEmail: result[0]['email'],
-                                groupLimit: newPost['groupLimit'],
-                                body: newPost['body'],
-                                pictureUrl: result[0]['picture_url'],
-                                user: result[0]['user_name'],
-                                authorId: result[0]['id']
-                            }).then(function (result) {
-                                //on the creation of a new post, associate the creator with his/her own group
-                                db.UserPost.create({
-                                    userEmail: currentUser,
-                                    UserId: result['authorId'],
-                                    PostId: result['id']
-                                })
-
-                                //refresh to see changes
-                                res.redirect('/');
-                        }).catch(function (err) {
-                            console.log(err);
-                        });
-                    });
-
-                //if the fields were empty, then stop and show modal
-                } else {
-                    Promise.all([
-                        db.Post.findAll({})
-                    ]).then(function (result) {
-                        res.render("emptyInputModal", {
-                            posts: result[0] || []
-                        });
-                    });
-                }
-
-        }
-    });
-    app.post('/post/join', function (req, res) {
-        //if user is not logged in, stop and serve modal
-        if(JSON.stringify(req.user) === undefined){
-            Promise.all([
-                    db.Post.findAll({}),
-                    db.User.findAll({}),
-                    db.UserPost.findAll({})
-                ]).then(function (result) {
-                    res.render("pleaseLoginModal", {
-                        posts: result[0] || [],
-                        users: result[1] || [],
-                        groups: result[2] || []
-                    });
-                });
-        }
-        //if user is logged in
-        else {
-
-            //get the info of the current user and the post he/she just selected
-            var currentUser = req.user._json.email;
-            var selectPostId = req.body.postId;
-            var selectGroupLimit = req.body.groupLimit;
-
-                //then find all the UserPost entries linked to that selected post
-                db.UserPost.findAll({
-                    where: {
-                        postId: selectPostId
-                    }
-                }).then(function (result) {
-
-                    //then check to see if the current user already joined this group
-                    var userAlreadyJoinBool=false;
-
-                    for (var i = 0; i < result.length; i++) {
-                        if(result[i]['userEmail'] === currentUser){
-                        userAlreadyJoinBool=true;
-                        }
-                    }
-
-                    //if the user has already joined this group then stop and serve modal
-                    if(userAlreadyJoinBool){
-
-                        Promise.all([
-                            db.Post.findAll({}),
-                        ]).then(function (result) {
-                            var posts = result[0];
-                            res.render("cantJoinModal", {
-                                posts: posts,
-                                user: req.user
-                            });
-                        }).catch(function (e) {
-                            console.log(e);
-                        });
-
-                    //if the user has not joined then create UserPost entry with the user and post info
-                    } else{
-                        var emailBody;
-
-                        Promise.all([
-                            db.User.find({
-                                where: {
-                                    email: currentUser
-                                }
-                            }),
-                            db.Post.find({
-                                where: {
-                                    id: selectPostId
-                                }
-                            })
-                        ]).then(function (result) {
-                            //save email body
-                            emailBody = result[1]['body'];
-                            // after UserPost is created, check if group limit is met
-                            db.UserPost.create({
-                                userEmail: currentUser,
-                                UserId: result[0]['id'],
-                                PostId: selectPostId
-                            }).then(function (result) {
-
-                                db.UserPost.findAll({
+                        //SAVE EMAIL BODY
+                        emailBody = result[1]['body'];
+                        // CHECK IF EVENT REQUIREMENTS HAVE BEEN MET ONCE EVENT IS CREATED
+                        db.UserPost.create({
+                            userEmail: currentUser,
+                            UserId: result[0]['id'],
+                            PostId: selectPostId
+                        }).then(function (result) {
+                            db.UserPost.findAll({
                                 where: {
                                     postId: selectPostId
                                 }
                             }).then(function (result) {
-                                    // if group limit is met, send to past projects and send everyone email
-                                   if (result.length == selectGroupLimit) {
+                                // SEND TO SAVED PROJECT PAGE IS EVENT HAS MET REQUIREMENTS AND 
+                                if (result.length == selectGroupLimit) {
 
-                                    var listOfEmails="";
+                                    var listOfEmails = "";
 
                                     for (var i = 0; i < result.length; i++) {
                                         var recipient = result[i]['userEmail'] + ', ';
                                         listOfEmails = listOfEmails.concat(recipient);
                                     }
-
                                     listOfEmails = listOfEmails.slice(0, (listOfEmails.length - 2));
-
-                                        // setup email data with unicode symbols
-                                        var mailOptions = {
-                                            from: '"Project Depot Team 👻" <projectdepotteam@gmail.com>', // sender address
-                                            to: listOfEmails, // list of receivers
-                                            subject: 'Project COLLABORATION!', // Subject line
-                                            text: 'Hi! Let\'s work together!', // plain text body
-                                            html: '<b>Hi! Let\'s work together!</b><p>This is an official email from Project Depot!</p><p>Your group\'s project description is written below: </p>' + '"'+emailBody+'"'
-                                        };
-
-                                        transporter.sendMail(mailOptions, (error, info) => {
-                                            if (error) {
-                                                return console.log(error);
-                                            }
-                                            console.log('Message %s sent: %s', info.messageId, info.response);
-                                        });
-
-                                        db.Post.update({
-                                                capacity: true
-                                            }, {
-                                                where: {
-                                                id: selectPostId
-                                                }
-                                        });
-
+                                    // NODE MAILER OPTIONS
+                                    var mailOptions = {
+                                        from: '"Study Hall" <pronghorns2017@gmail.com>',
+                                        to: listOfEmails,
+                                        subject: 'Your Event is Ready to Schedule!',
+                                        text: 'Hi! Please connect with us!',
+                                        html: '<b>Hi! Please connect with us!</b><p>Your study group is ready to be scheduled!</p><p>Here are the topcs you will discuss: </p>' + '"' + emailBody + '"'
+                                    };
+                                    transporter.sendMail(mailOptions, (error, info) => {
+                                        if (error) {
+                                            return console.log(error);
+                                        }
+                                        console.log('Message %s sent: %s', info.messageId, info.response);
+                                    });
+                                    //UPDATE POST CAPACITY
+                                    db.Post.update({
+                                        capacity: true
+                                    }, {
+                                        where: {
+                                            id: selectPostId
+                                        }
+                                    });
                                     Promise.all([
                                         db.Post.findAll({}),
                                     ]).then(function (result) {
@@ -238,32 +219,30 @@ module.exports = function (app) {
                                     }).catch(function (e) {
                                         console.log(e);
                                     });
-
-                               }
-                               // if group limit is not met, notify user that he has joined successfully
-                               else{
-
+                                }
+                                // TRIGGER MODAL IF GROUP LIMIT IS NOT MET
+                                else {
                                     Promise.all([
-                                            db.Post.findAll({}),
-                                        ]).then(function (result) {
-                                            var posts = result[0];
-                                            res.render("joinModal", {
-                                                posts: posts,
-                                                user: req.user
-                                            });
-                                        }).catch(function (e) {
-                                            console.log(e);
+                                        db.Post.findAll({}),
+                                    ]).then(function (result) {
+                                        var posts = result[0];
+                                        res.render("joinModal", {
+                                            posts: posts,
+                                            user: req.user
                                         });
-                                    }
-
-                            });
+                                    }).catch(function (e) {
+                                        console.log(e);
+                                    });
+                                }
 
                             });
 
                         });
-                    }
 
-                });
+                    });
+                }
+
+            });
         }
 
     });
