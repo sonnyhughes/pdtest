@@ -1,28 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
-   <head>
-      <meta charset="utf-8">
-      <title>Study Hall</title>
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <meta name="description" content="" />
-      <meta name="author" content="http://bootstraptaste.com" />
-      <!-- css -->
-      <link href="/assets/css/bootstrap.min.css" rel="stylesheet" />
-      <link href="/assets/css/fancybox/jquery.fancybox.css" rel="stylesheet">
-      <link href="/assets/css/jcarousel.css" rel="stylesheet" />
-      <link href="/assets/css/flexslider.css" rel="stylesheet" />
-      <link href="/assets/css/style.css" rel="stylesheet" />
-      <!-- Theme skin -->
-      <link href="/assets/css/skins/default.css" rel="stylesheet" />
-      <!-- =======================================================
-         Theme Name: Moderna
-         Theme URL: https://bootstrapmade.com/free-bootstrap-template-corporate-moderna/
-         Author: BootstrapMade
-         Author URL: https://bootstrapmade.com
-         ======================================================= -->
-   </head>
+
+<head>
+  <meta charset="utf-8">
+  <title>Study Hall</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="" />
+  <meta name="author" content="http://bootstraptaste.com" />
+  {{!-- CSS TEMPLATES --}}
+  <link href="/assets/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="/assets/css/fancybox/jquery.fancybox.css" rel="stylesheet">
+  <link href="/assets/css/jcarousel.css" rel="stylesheet" />
+  <link href="/assets/css/flexslider.css" rel="stylesheet" />
+  <link href="/assets/css/style.css" rel="stylesheet" />
+  {{!-- THEME SKIN --}}
+  <link href="/assets/css/skins/default.css" rel="stylesheet" />
+</head>
+
    <body>
-      <!-- start header -->
+      {{!-- HEADER --}}
       <header>
          <div class="navbar navbar-default navbar-static-top">
             <div class="container">
@@ -39,12 +35,12 @@
                      {{#if user}}
                      <li class="active"><a href="/">Home</a></li>
                      <li><a href="/account">Account</a></li>
-                     {{!-- <li><a href="/past">Past Topics</a></li> --}}
+                     {{!-- <li><a href="/past">Expired Events</a></li> --}}
                      <li><a href="/logout">Log Out</a></li>
                      <h4 class="hello">Hello, {{user.displayName}}</h4>
                      {{else}}
                      <li class="active"><a href="/">Home</a></li>
-                     {{!-- <li><a href="/past">Past Topics</a></li> --}}
+                     {{!-- <li><a href="/past">Expired Events</a></li> --}}
                      <li><a href="/auth/github/callback">Login With Github</a></li>
                      <h4 class="welcome"></h4>
                      {{/if}}
@@ -54,12 +50,13 @@
             </div>
          </div>
       </header>
-      <!-- End Header -->
+      {{!-- END HEADER --}}
 
-      <section class="callaction">
-         <div class="container">
-            <div class="row">
-               <!-- Inputting Idea -->
+   {{!-- CALL TO ACTION --}}
+  <section class="callaction">
+    <div class="container">
+      <div class="row">
+        {{!-- EVENT INPUT --}}
                <div class="col-lg-6">
                   <div class="big-cta">
                      <div class="cta-text">
@@ -125,10 +122,10 @@
       </section>
 
 
-<!-- All Ideas Section -->
+{{!-- EVENTS CONTAINER --}}
 <section id="content"></section>
 
-<!-- footer -->
+{{!-- FOOTER --}}
 <footer>
    <div class="container">
       <div class="row">
@@ -175,14 +172,6 @@
             <div class="col-lg-6">
                <div class="copyright">
                   <p>&copy; Study Hall. All right reserved.</p>
-                  <div class="credits">
-                     <!--
-                        All the links in the footer should remain intact.
-                        You can delete the links only if you purchased the pro version.
-                        Licensing information: https://bootstrapmade.com/license/
-                        Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/buy/?theme=Moderna
-                        -->
-                  </div>
                </div>
             </div>
             <div class="col-lg-6">
@@ -198,7 +187,6 @@
 </footer>
 </div>
 <a href="#" class="scrollup"><i class="fa fa-angle-up active"></i></a>
-<!-- Placed at the end of the document so the pages load faster -->
 
 <script src="/assets/js/jquery.js"></script>
 <script src="/assets/js/jquery.easing.1.3.js"></script>

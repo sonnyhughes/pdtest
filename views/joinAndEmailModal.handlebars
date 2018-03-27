@@ -1,28 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
-   <head>
-      <meta charset="utf-8">
-      <title>Study Hall</title>
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <meta name="description" content="" />
-      <meta name="author" content="http://bootstraptaste.com" />
-      <!-- css -->
-      <link href="/assets/css/bootstrap.min.css" rel="stylesheet" />
-      <link href="/assets/css/fancybox/jquery.fancybox.css" rel="stylesheet">
-      <link href="/assets/css/jcarousel.css" rel="stylesheet" />
-      <link href="/assets/css/flexslider.css" rel="stylesheet" />
-      <link href="/assets/css/style.css" rel="stylesheet" />
-      <!-- Theme skin -->
-      <link href="/assets/css/skins/default.css" rel="stylesheet" />
-      <!-- =======================================================
-         Theme Name: Moderna
-         Theme URL: https://bootstrapmade.com/free-bootstrap-template-corporate-moderna/
-         Author: BootstrapMade
-         Author URL: https://bootstrapmade.com
-         ======================================================= -->
-   </head>
-   <body>
-      <!-- start header -->
+
+<head>
+  <meta charset="utf-8">
+  <title>Study Hall</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="" />
+  <meta name="author" content="http://bootstraptaste.com" /> 
+  {{!-- CSS TEMPLATES --}}
+  <link href="/assets/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="/assets/css/fancybox/jquery.fancybox.css" rel="stylesheet">
+  <link href="/assets/css/jcarousel.css" rel="stylesheet" />
+  <link href="/assets/css/flexslider.css" rel="stylesheet" />
+  <link href="/assets/css/style.css" rel="stylesheet" /> 
+  {{!-- THEME SKIN --}}
+  <link href="/assets/css/skins/default.css" rel="stylesheet" />
+</head>
+
+<body>
+  {{!-- HEADER --}}
       <header>
          <div class="navbar navbar-default navbar-static-top">
             <div class="container">
@@ -39,12 +35,12 @@
                      {{#if user}}
                      <li class="active"><a href="/">Home</a></li>
                      <li><a href="/account">Account</a></li>
-                     {{!-- <li><a href="#">Past Topics</a></li> --}}
+                     {{!-- <li><a href="#">Expired Events</a></li> --}}
                      <li><a href="/logout">Log Out</a></li>
                      <h4 class="hello">Hello, {{user.displayName}}</h4>
                      {{else}}
                      <li class="active"><a href="/">Home</a></li>
-                     {{!-- <li><a href="#">Past Topics</a></li> --}}
+                     {{!-- <li><a href="#">Expired Events</a></li> --}}
                      <li><a href="/login">Login</a></li>
                      <h4 class="welcome"></h4>
                      {{/if}}
@@ -54,48 +50,13 @@
             </div>
          </div>
       </header>
-      <!-- End Header -->
-      <!-- Start of carousel -->
-      {{!-- <div class="container">
-         <div id="myCarousel" class="carousel slide" data-ride="carousel">
-            <!-- Indicators -->
-            <ol class="carousel-indicators">
-               <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-               <li data-target="#myCarousel" data-slide-to="1"></li>
-               <li data-target="#myCarousel" data-slide-to="2"></li>
-            </ol>
-            <!-- Wrapper for slides -->
-            <div class="carousel-inner" role="listbox">
-               <div class="item active">
-                  <img src="/assets/img/slides/img2.jpg" width="100%" alt="">
-                  <div class="flex-caption">
-                    <h3>EXPLORE</h3>
-                    <p>Explore projects, join a team and begin! It's that simple.</p>
-                  </div>
-               </div>
-               <div class="item">
-                  <img src="/assets/img/slides/img1.jpeg" width="100%" alt="">
-                  <div class="flex-caption">
-                    <h3>INNOVATE</h3>
-                    <p>Put your skills to work and start building!</p>
-                  </div>
-               </div>
-               <div class="item">
-                  <img src="/assets/img/slides/img3.jpeg" width="100%" alt="">
-                  <div class="flex-caption">
-                    <h3>CONNECT</h3>
-                    <p>Be part of a community passionate about web development.</p>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </div> --}}
-      <!-- End of carousel -->
-      <!-- Second Header Section -->
-      <section class="callaction">
-         <div class="container">
-            <div class="row">
-               <!-- Inputting Idea -->
+      {{!-- END HEADER --}}
+
+   {{!-- CALL TO ACTION --}}
+  <section class="callaction">
+    <div class="container">
+      <div class="row">
+        {{!-- EVENT INPUT --}}
                <div class="col-lg-6">
                   <div class="big-cta">
                      <div class="cta-text">
@@ -127,10 +88,10 @@
       </section>
 
 
-<!-- All Ideas Section -->
-<section id="content">
-   <!-- For each post, create a div col-lg-3 -->
-   <div class="container">
+   {{!-- EVENTS CONTAINER --}}
+  <section id="content">
+    {{!-- CREATE 3 COLUMN DIV FOR EACH SUBMITTED EVENT --}}
+    <div class="container">
       <div class="row">
          <div class="col-lg-6">
             <div class="row">
@@ -162,7 +123,7 @@
 </section>
 
 
-<!--footer -->
+{{!-- FOOTER --}}
 <footer>
    <div class="container">
       <div class="row">
@@ -209,14 +170,6 @@
             <div class="col-lg-6">
                <div class="copyright">
                   <p>&copy; Study Hall. All right reserved.</p>
-                  <div class="credits">
-                     <!--
-                        All the links in the footer should remain intact.
-                        You can delete the links only if you purchased the pro version.
-                        Licensing information: https://bootstrapmade.com/license/
-                        Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/buy/?theme=Moderna
-                        -->
-                  </div>
                </div>
             </div>
             <div class="col-lg-6">
@@ -233,7 +186,7 @@
 </div>
 <a href="#" class="scrollup"><i class="fa fa-angle-up active"></i></a>
 
-<!-- Modal -->
+{{!-- MODAL --}}
 <div class="modal fade" id="joinedEmail" tabindex="-1" role="dialog" aria-labelledby="fullGroup" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -254,7 +207,6 @@
   </div>
 </div>
 
-<!-- Placed at the end of the document so the pages load faster -->
 <script src="/assets/js/jquery.js"></script>
 <script src="/assets/js/jquery.easing.1.3.js"></script>
 <script src="/assets/js/bootstrap.min.js"></script>
