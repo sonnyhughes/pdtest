@@ -1,4 +1,4 @@
-//dependencies
+//DEPENDENCIES
 var express = require("express");
 var bodyParser = require("body-parser");
 var methodOverride = require("method-override");
@@ -54,18 +54,14 @@ app.use(passport.session());
 
 // STATIC CONTENT
 app.use(express.static(__dirname + '/public'));
-// 
 
 // HANDLEBARS ENGINE
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
-
 //IMPORT ROUTES
 var sandboxRoutes = require("./controllers/sandbox_controller.js")(app);
-
 var loginRoutes = require("./controllers/login_controller.js")(app);
-
 var pageRoutes = require("./controllers/pages_controller.js")(app);
 
 //DATABASE LISTENING

@@ -1,6 +1,5 @@
-// Require functions from the models folder (index.js and burger.js)
+// REQUIRE MODELS
 var db = require("../models");
-// Export these awesome routes
 var passport = require('passport');
 
 module.exports = function (app) {
