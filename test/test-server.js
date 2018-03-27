@@ -28,20 +28,20 @@ describe("Status and content", function() {
         });
     });
     
-    // Project Posting
-    describe("Project posting", function() {
-        it("it should POST a project", function(done) {
-            var project = {
+    // Event Posting
+    describe("Event posting", function() {
+        it("it should POST an event", function(done) {
+            var event = {
                 authorEmail: "test email"['email'],
                 groupLimit: 5['groupLimit'],
-                body: "New test project"['body'],
+                body: "New test event"['body'],
                 pictureUrl: ['picture_url'],
                 user: ['user_name'],
                 authorId: 2['id']
             };
             chai.request(server)
             .post("/add")
-            .send(project)
+            .send(event)
             .end(function(err, res) {
                 expect(res.statusCode).to.equal(200);
                 // this doesn't work, not sure why
@@ -49,13 +49,13 @@ describe("Status and content", function() {
                 done();
             });
         });
-        // it("it should not post a project without.....", function(done) {
+        // it("it should not post a event without.....", function(done) {
             
         // });
     });
 
-    // Past project page
-    describe("Past project page", function() {
+    // Past event page
+    describe("Past event page", function() {
         it("should load", function(done) {
             chai.request(server)
             .get("/past")
@@ -77,7 +77,7 @@ describe("Status and content", function() {
 
     // Passport/Auth
 
-    // Project joining
+    // Event joining
 
     // Terms info
 
@@ -86,8 +86,8 @@ describe("Status and content", function() {
 });
 
 
-// it("should add a SINGLE project on /add POST");
-// it("should add a SINGLE user to a project on /post/join POST");
-// it("should list ALL past projects on /past GET");
+// it("should add a SINGLE event on /add POST");
+// it("should add a SINGLE user to a event on /post/join POST");
+// it("should list ALL past events on /past GET");
 // it("should ..... on /terms GET");
 // it("should ..... on /privacy GET");
