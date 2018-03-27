@@ -60,13 +60,13 @@ app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
 //IMPORT ROUTES
-var sandboxRoutes = require("./controllers/sandbox_controller.js")(app);
+var sandboxRoutes = require("./controllers/app_controller.js")(app);
 var loginRoutes = require("./controllers/login_controller.js")(app);
 var pageRoutes = require("./controllers/pages_controller.js")(app);
 
 //DATABASE LISTENING
 db.sequelize.sync().then(function() {
     app.listen(PORT, function () {
-console.log("App listening this awesome PORT: " + PORT);
+console.log("App listening on PORT: " + PORT);
     });
 });
