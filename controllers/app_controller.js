@@ -1,4 +1,4 @@
-// Require functions from the models folder (index.js and burger.js)
+// REQUIRE MODELS
 var db = require("../models");
 
 // checks if user is logged in
