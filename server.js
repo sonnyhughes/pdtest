@@ -16,10 +16,10 @@ var GITHUB_CLIENT_ID = "caff6bf6f0c8379836f4";
 var GITHUB_CLIENT_SECRET = "34e26a2b6b29e0e58ccc1ea8e60ad3f119baa5c0";
 
 // PASSPORT SESSION SETUP
-passport.serializeUser(function(user, done) {
+passport.serializeUser(function (user, done) {
   done(null, user);
 });
-passport.deserializeUser(function(obj, done) {
+passport.deserializeUser(function (obj, done) {
   done(null, obj);
 });
 
@@ -29,7 +29,7 @@ passport.use(new GitHubStrategy({
     clientSecret: GITHUB_CLIENT_SECRET,
     callbackURL: "https://projectdepottest.herokuapp.com/auth/github/callback"
   },
-  function(accessToken, refreshToken, profile, done) {
+  function (accessToken, refreshToken, profile, done) {
     process.nextTick(function () {
       return done(null, profile);
     });
@@ -39,14 +39,22 @@ passport.use(new GitHubStrategy({
 // EXPRESS APP
 var app = express();
 app.use(partials());
-app.use(session({ secret: 'keyboard cat', resave: false, saveUninitialized: false }));
+app.use(session({
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: false
+}));
 app.use(methodOverride("_method"));
 
 //BODY PARSER FOR POST AND PUT
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
 app.use(bodyParser.text());
-app.use(bodyParser.json({ type: "application/vnd.api+json" }));
+app.use(bodyParser.json({
+  type: "application/vnd.api+json"
+}));
 
 // INIT PASSPORT
 app.use(passport.initialize());
@@ -56,17 +64,19 @@ app.use(passport.session());
 app.use(express.static(__dirname + '/public'));
 
 // HANDLEBARS ENGINE
-app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+app.engine("handlebars", exphbs({
+  defaultLayout: "main"
+}));
 app.set("view engine", "handlebars");
 
 //IMPORT ROUTES
-var sandboxRoutes = require("./controllers/app_controller.js")(app);
+var appRoutes = require("./controllers/app_controller.js")(app);
 var loginRoutes = require("./controllers/login_controller.js")(app);
 var pageRoutes = require("./controllers/pages_controller.js")(app);
 
 //DATABASE LISTENING
-db.sequelize.sync().then(function() {
-    app.listen(PORT, function () {
-console.log("App listening on PORT: " + PORT);
-    });
+db.sequelize.sync().then(function () {
+  app.listen(PORT, function () {
+    console.log("App listening on PORT: " + PORT);
+  });
 });
