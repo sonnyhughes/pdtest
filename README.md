@@ -48,10 +48,3 @@ Run npm install in the terminal/command line:
 
 * Run node server.js
 * Visit localhost:8080 
-
-## Deployment
-
-Study Hall was deployed using Heroku and it's JawsDB add-on:
-
-https://elements.heroku.com/addons/jawsdb
-
