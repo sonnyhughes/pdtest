@@ -8,7 +8,7 @@ https://projectdepottest.herokuapp.com/
 
 ## Getting Started
 
-Clone the Sandbox repository (https://github.com/sonnyhughes/pdtest.git).
+Clone the repository (https://github.com/sonnyhughes/pdtest.git).
 
 ## Built With
 
@@ -51,7 +51,7 @@ Run npm install in the terminal/command line:
 
 ## Deployment
 
-Sandbox was deployed using Heroku and it's JawsDB add-on:
+Study Hall was deployed using Heroku and it's JawsDB add-on:
 
 https://elements.heroku.com/addons/jawsdb
 
